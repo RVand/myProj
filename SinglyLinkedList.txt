@@ -4,7 +4,7 @@
 *	traverses the linked and finds the proper node to delete and connects the nodes again.
 *	It will use the toString() to print the linked list. 
 *	The Node class and toString() are taken from the source code from the assignment.
-/*
+*/
 
 public class SinglyLinkedList {
 	//Node class from source code
