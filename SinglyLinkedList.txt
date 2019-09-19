@@ -1,4 +1,4 @@
-*/
+/*
 *	A singly linked list program that takes in intigers and creates a linked list 
 *	and orders them from least to greatest. There is also a deletion method that
 *	traverses the linked and finds the proper node to delete and connects the nodes again.
