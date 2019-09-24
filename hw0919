@@ -1,0 +1,146 @@
+/*
+  Randy Andrews
+  COSC 311 hw 0919
+  Due: 09/24/19
+*/
+
+Question 1: 
+//assisted with the help of my former roomate Brain Andrews 
+import java.util.*;
+
+class Main {
+	public static void main(String[] args) {
+		Queue<Integer> j = new PriorityQueue<Integer>();
+		j.add(21);
+		j.add(0);
+		j.add(-11);
+		j.add(14);
+		List<Integer> l = new ArrayList<Integer>();
+		l.addAll(q);
+		Collections.sort(l);
+		Iterator<Integer> i = l.iterator();
+		System.out.print("Queue in order is: ");
+		while (i.hasNext()) {
+			System.out.print(i.next() + " ");
+		}
+	}
+}
+/*
+  Output:
+  Queue in order is: -11 0 14 21
+*/
+
+Question 2:
+
+Question 3:
+At time t=0, T1 is scheduled for one tick.
+At time t=1, T2 is scheduled for one tick.
+At time t=2, T3 is scheduled for one tick.
+At time t=3, T1 is scheduled for one tick. L1 finishes its execution.
+At time t=4, T2 is scheduled for one tick.
+At time t=5, T3 is scheduled for one tick.
+At time t=6, T2 is scheduled for one tick.
+At time t=7, T3 is scheduled for one tick. L3 finishes its execution.
+At time t=8, T2 is scheduled for one tick. L2 finishes its execution.
+
+
+
+Question 4:
+/*
+  This is a program creates a circular queue using insert methods that check if the array is empty
+  it will then be able to insert an elemt as long as it doesnt fill up (head == tail+1) checking
+  the space between head and tail. It is also able to delete from the queue. It first checks if the
+  array is empty then it is able to save the variable that was taken from the queue and reataches the array.
+  it is then able to display which checks if its empty before being iterated through the for loop checking 
+  if the tail has passed head and then printint the remaining elements in the queue.
+*/
+import java.util.*;
+class queue {
+	int tail, head;
+	int size;
+	int arr[];
+
+	queue(int n) {
+		this.head = this.tail = -1;
+		this.size = n;
+		arr = new int[n];
+	}
+
+	void insert(int value) {
+		// Queue is full
+		if (isFull()) {
+			System.out.println("Queue is full\n");
+			return;
+			// if queue is originally empty
+		} else if (head == -1) {
+			head = tail = 0;
+			arr[tail] = value;
+			// inserting after deletion
+		} else if (tail == size - 1 && head != 0) {
+			tail = 0;
+			arr[tail] = value;
+		} else {
+			tail++;
+			arr[tail] = value;
+		}
+	}
+
+	int delete() {
+		// Queue is empty if head=-1
+		if (isEmpty()) {
+			System.out.println("Queue is empty");
+			return -1;
+		}
+		// store element to be deleted
+		int del = arr[head];
+		// setting to be -1 index
+		arr[head] = -1;
+		if (head == tail) {
+			head = tail = -1;
+			// after being emptied
+		} else if (head == size - 1)
+			head = 0;
+		else
+			head++;
+		return del;
+	}
+
+	void display() {
+		int i;
+		if (!isEmpty()) {
+			System.out.println("Element Index");
+			if (tail >= head) {
+				for (i = head; i <= tail; i++) {
+					System.out.println(arr[i] + " " + i);
+				}
+			} else {
+				for (i = head; i < size; i++)
+					System.out.println(arr[i] + " " + i);
+				for (i = 0; i <= tail; i++)
+					System.out.println(arr[i] + " " + i);
+			}
+		}
+	}
+
+	boolean isFull() {
+		return head == tail + 1;
+	}
+
+	boolean isEmpty() {
+		return head - 1 == tail;
+	}
+
+	public static void main(String[] args) {
+		queue obj = new queue(4);
+		// inserting and deleting into queue
+		obj.insert(10);
+		obj.insert(11);
+		obj.insert(12);
+		obj.delete();
+		obj.delete();
+		obj.insert(13);
+		obj.delete();
+		obj.delete();
+		obj.insert(14);
+		obj.display();
+	}
